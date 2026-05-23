@@ -1,9 +1,9 @@
 {
-  "name": "subway-surfer-kids-game",
+  "name": "run-krishna-run",
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "description": "A tiny Subway Surfers-style endless runner for kids, built with Phaser 3 + Vite.",
+  "description": "Run Krishna Run — a tiny Subway Surfers-style endless runner for kids, built with Phaser 3 + Vite.",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

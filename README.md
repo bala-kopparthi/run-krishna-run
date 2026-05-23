@@ -1,4 +1,4 @@
-# 🏃 KD Krishna — A Tiny Endless Runner
+# 🏃 Run Krishna Run — A Tiny Endless Runner
 
 A colorful, kid-friendly endless runner game inspired by **Subway Surfers**, built
 with **Phaser 3** + **Vite**. It runs entirely in your browser — no backend, no
@@ -63,7 +63,7 @@ npm run preview
 ## 🗂 Folder Structure
 
 ```
-subway-surfer-kids-game/
+run-krishna-run/
 ├── index.html                 # Page shell + canvas mount
 ├── package.json               # npm scripts + Phaser/Vite deps
 ├── vite.config.js             # Dev server config

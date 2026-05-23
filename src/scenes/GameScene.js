@@ -7,7 +7,7 @@ import {
   playJump, playCoin, playCrash, playClick, playPowerUp, stopMusic
 } from '../utils/soundGenerator.js';
 
-const HIGH_SCORE_KEY = 'kdKrishna.highScore';
+const HIGH_SCORE_KEY = 'runKrishnaRun.highScore';
 
 // Three lane X positions.
 const LANES = [GAME_WIDTH / 2 - 110, GAME_WIDTH / 2, GAME_WIDTH / 2 + 110];
