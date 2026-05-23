@@ -1,4 +1,4 @@
-# 🏃 Sunny Run — A Tiny Endless Runner
+# 🏃 KD Krishna — A Tiny Endless Runner
 
 A colorful, kid-friendly endless runner game inspired by **Subway Surfers**, built
 with **Phaser 3** + **Vite**. It runs entirely in your browser — no backend, no

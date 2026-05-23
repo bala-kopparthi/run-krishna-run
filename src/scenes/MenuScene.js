@@ -3,7 +3,7 @@ import Phaser from 'phaser';
 import { GAME_WIDTH, GAME_HEIGHT } from '../main.js';
 import { playClick, startMusic, setMuted, isMuted } from '../utils/soundGenerator.js';
 
-const HIGH_SCORE_KEY = 'sunnyRun.highScore';
+const HIGH_SCORE_KEY = 'kdKrishna.highScore';
 
 export default class MenuScene extends Phaser.Scene {
   constructor() { super('MenuScene'); }
@@ -12,9 +12,9 @@ export default class MenuScene extends Phaser.Scene {
     this.add.image(GAME_WIDTH / 2, GAME_HEIGHT / 2, 'sky');
 
     // Title bubble.
-    this.add.text(GAME_WIDTH / 2, 130, 'SUNNY RUN', {
+    this.add.text(GAME_WIDTH / 2, 130, 'KD KRISHNA', {
       fontFamily: 'Comic Sans MS, Chalkboard SE, sans-serif',
-      fontSize: '64px',
+      fontSize: '60px',
       color: '#ff4081',
       stroke: '#ffffff',
       strokeThickness: 8,
