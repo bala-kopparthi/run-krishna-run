@@ -2,7 +2,7 @@
 // 3-lane setup. Obstacles + coins spawn at the top and scroll down toward the
 // player. The player stays in a fixed Y range, jumping or sliding to dodge.
 import Phaser from 'phaser';
-import { GAME_WIDTH, GAME_HEIGHT } from '../main.js';
+import { GAME_WIDTH, GAME_HEIGHT } from '../constants.js';
 import {
   playJump, playCoin, playCrash, playClick, playPowerUp, stopMusic
 } from '../utils/soundGenerator.js';

@@ -1,13 +1,10 @@
 // Entry point — wires up Phaser with our scenes.
 import Phaser from 'phaser';
+import { GAME_WIDTH, GAME_HEIGHT } from './constants.js';
 import BootScene from './scenes/BootScene.js';
 import MenuScene from './scenes/MenuScene.js';
 import GameScene from './scenes/GameScene.js';
 import GameOverScene from './scenes/GameOverScene.js';
-
-// Logical game size — Phaser will scale this to fit the window.
-export const GAME_WIDTH = 480;
-export const GAME_HEIGHT = 720;
 
 const config = {
   type: Phaser.AUTO,
@@ -31,8 +28,18 @@ const config = {
   scene: [BootScene, MenuScene, GameScene, GameOverScene]
 };
 
-// Boot the game once the DOM is ready.
-window.addEventListener('load', () => {
+// Boot the game. ES modules execute after DOMContentLoaded, so the
+// #game-root element is guaranteed to exist by now — no need to wait
+// for the `load` event (which may have already fired by the time this
+// module finishes downloading).
+function boot() {
+  console.log('[Run Krishna Run] booting Phaser…');
   // eslint-disable-next-line no-new
   new Phaser.Game(config);
-});
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', boot, { once: true });
+} else {
+  boot();
+}

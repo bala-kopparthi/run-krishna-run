@@ -1,6 +1,6 @@
 // MenuScene: title + Play button + high score + mute toggle.
 import Phaser from 'phaser';
-import { GAME_WIDTH, GAME_HEIGHT } from '../main.js';
+import { GAME_WIDTH, GAME_HEIGHT } from '../constants.js';
 import { playClick, startMusic, setMuted, isMuted } from '../utils/soundGenerator.js';
 
 const HIGH_SCORE_KEY = 'runKrishnaRun.highScore';

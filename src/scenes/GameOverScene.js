@@ -1,6 +1,6 @@
 // GameOverScene: shows the score and a big restart button.
 import Phaser from 'phaser';
-import { GAME_WIDTH, GAME_HEIGHT } from '../main.js';
+import { GAME_WIDTH, GAME_HEIGHT } from '../constants.js';
 import { playClick, startMusic } from '../utils/soundGenerator.js';
 
 export default class GameOverScene extends Phaser.Scene {
