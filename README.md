@@ -5,6 +5,8 @@ with **Phaser 3** + **Vite**. It runs entirely in your browser — no backend, n
 sign-up, no downloads of art or music. All graphics and sounds are generated at
 runtime, so the whole game weighs almost nothing.
 
+This is my gift to my 7-year old son, Krishna !!!
+
 > Designed to feel like *"a tiny Subway Surfers clone made for a 7-year-old kid"*.
 
 ---
