@@ -6,7 +6,7 @@ import { playClick, startMusic } from '../utils/soundGenerator.js';
 export default class GameOverScene extends Phaser.Scene {
   constructor() { super('GameOverScene'); }
 
-  init(data) { this.data = data || { score: 0, coins: 0, best: 0 }; }
+  init(data) { this.data = data || { score: 0, coins: 0, best: 0, kidMode: false }; }
 
   create() {
     this.add.image(GAME_WIDTH / 2, GAME_HEIGHT / 2, 'sky');
@@ -48,19 +48,20 @@ export default class GameOverScene extends Phaser.Scene {
       strokeThickness: 5
     }).setOrigin(0.5);
 
+    // PLAY AGAIN preserves kid mode. MAIN MENU clears it.
     this.makeButton(GAME_WIDTH / 2, 520, 'PLAY AGAIN ▶', () => {
       startMusic();
-      this.scene.start('GameScene');
+      this.scene.start('GameScene', { kidMode: this.data.kidMode });
     });
     this.makeButton(GAME_WIDTH / 2, 610, 'MAIN MENU', () => this.scene.start('MenuScene'));
 
     this.input.keyboard.once('keydown-SPACE', () => {
       startMusic();
-      this.scene.start('GameScene');
+      this.scene.start('GameScene', { kidMode: this.data.kidMode });
     });
     this.input.keyboard.once('keydown-ENTER', () => {
       startMusic();
-      this.scene.start('GameScene');
+      this.scene.start('GameScene', { kidMode: this.data.kidMode });
     });
   }
 

@@ -75,6 +75,33 @@ export default class MenuScene extends Phaser.Scene {
     // Allow ENTER / SPACE to start.
     this.input.keyboard.once('keydown-ENTER', () => this.startGame());
     this.input.keyboard.once('keydown-SPACE', () => this.startGame());
+
+    // -----------------------------------------------------------------
+    // SECRET KID-MODE BUTTON
+    // -----------------------------------------------------------------
+    // A near-invisible dot in the bottom-right corner. Tapping it starts
+    // a run where the right-most lane (lane index 2) has NO obstacles
+    // until the player collects 1000 coins. Speed still ramps up
+    // normally. After 1000 coins, regular gameplay resumes.
+    //
+    // The visible dot is tiny + low-opacity so the kid won't notice it.
+    // A larger invisible Zone behind it makes it easy to tap on a
+    // touchscreen or with a fingertip.
+    const SECRET_X = GAME_WIDTH - 12;
+    const SECRET_Y = GAME_HEIGHT - 12;
+    this.add.circle(SECRET_X, SECRET_Y, 4, 0xffffff, 0.18);
+    const secretHit = this.add.zone(SECRET_X, SECRET_Y, 48, 48).setInteractive({ useHandCursor: true });
+    secretHit.on('pointerdown', () => {
+      playClick();
+      startMusic();
+      this.scene.start('GameScene', { kidMode: true });
+    });
+    // Keyboard escape hatch for the parent: pressing K also triggers it.
+    this.input.keyboard.once('keydown-K', () => {
+      playClick();
+      startMusic();
+      this.scene.start('GameScene', { kidMode: true });
+    });
   }
 
   startGame() {

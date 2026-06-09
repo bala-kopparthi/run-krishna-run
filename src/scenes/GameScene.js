@@ -16,6 +16,14 @@ const PLAYER_BASE_Y = GAME_HEIGHT - 140;
 export default class GameScene extends Phaser.Scene {
   constructor() { super('GameScene'); }
 
+  // Receive optional flags from MenuScene / GameOverScene.
+  // kidMode: when true, the right-most lane (index 2) won't spawn obstacles
+  // until the player has collected 1000 coins. Speed still ramps up normally.
+  init(data) {
+    this.kidMode = !!(data && data.kidMode);
+    this.kidModeCleared = false; // becomes true once 1000 coins are collected
+  }
+
   create() {
     // ----- World layers -----
     this.add.image(GAME_WIDTH / 2, GAME_HEIGHT / 2, 'sky');
@@ -297,7 +305,11 @@ export default class GameScene extends Phaser.Scene {
   // ----- Spawning -----
   spawnRow() {
     // Pick a lane to spawn an obstacle in.
-    const obstacleLane = Phaser.Math.Between(0, 2);
+    // In kid mode, lane index 2 (the right-most lane) stays obstacle-free
+    // until the player has collected 1000 coins.
+    const kidModeActive = this.kidMode && !this.kidModeCleared;
+    const maxLane = kidModeActive ? 1 : 2;
+    const obstacleLane = Phaser.Math.Between(0, maxLane);
     const type = Math.random() < 0.5 ? 'obstacleLow' : 'obstacleHigh';
     const obs = this.obstacles.create(LANES[obstacleLane], -60, type);
     obs.setData('type', type);
@@ -352,6 +364,12 @@ export default class GameScene extends Phaser.Scene {
     this.coinText.setText(`🪙 ${this.coinsCollected}`);
     this.coinParticles.emitParticleAt(coin.x, coin.y, 8);
     playCoin();
+    // Kid-mode milestone: once the player crosses 1000 coins, the safe
+    // right-most lane goes away and full gameplay resumes. Celebrate it!
+    if (this.kidMode && !this.kidModeCleared && this.coinsCollected >= 1000) {
+      this.kidModeCleared = true;
+      this.flashHud('AMAZING! 1000 COINS!');
+    }
   }
   onHit(_player, obs) {
     // If ducking and obstacle is high — pass through.
@@ -416,7 +434,10 @@ export default class GameScene extends Phaser.Scene {
       this.scene.start('GameOverScene', {
         score: this.score,
         coins: this.coinsCollected,
-        best: Math.max(prev, this.score)
+        best: Math.max(prev, this.score),
+        // Preserve kid-mode across PLAY AGAIN so the parent's "secret"
+        // setting carries through restarts. Returning to MAIN MENU clears it.
+        kidMode: this.kidMode && !this.kidModeCleared
       });
     });
   }
